@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Break & Bread - Menu</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f1ea;
+  color: #2b241a;
+}
+
+/* HEADER */
+header {
+  background: #1f1b16;
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #fbe3b0, #c7923e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  color: #1f1b16;
+}
+
+.branch-info {
+  font-size: 12px;
+  text-align: left;
+}
+
+/* FILTER BAR */
+.filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f3ec;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.filters-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.filters-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.filter-btn.active {
+  background: #c7923e;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(199,146,62,0.4);
+}
+
+.filters-menu-btn {
+  background: #1f1b16;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* FULLSCREEN FILTER MENU */
+.filters-fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.filters-fullscreen-content {
+  background: #fff;
+  width: 80%;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.filter-full-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f7f3ec;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.close-full {
+  margin-top: 12px;
+  padding: 10px;
+  width: 100%;
+  background: #c7923e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* MENU ITEMS */
+.menu-content {
+  padding: 20px;
+}
+
+.category-title {
+  font-size: 18px;
+  margin: 20px 0 10px;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.item-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.item-price {
+  color: #c7923e;
+  font-weight: 700;
+}
+
+.item-desc {
+  font-size: 12px;
+  color: #7a6a55;
+  margin-top: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <div class="brand-logo">B&B</div>
+    <div>
+      <h2 style="margin:0;">Break & Bread</h2>
+      <small>قائمة الطعام</small>
+    </div>
+  </div>
+
+  <div class="branch-info">
+    فرع الدمام<br>شارع المثال – ٧ صباحًا حتى ١٢ ليلًا
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filters-bar">
+  <div class="filters-scroll">
+
+    <button class="filter-btn active" data-filter="all">الكل</button>
+    <button class="filter-btn" data-filter="offers">عروض</button>
+    <button class="filter-btn" data-filter="meals">وجبات</button>
+    <button class="filter-btn" data-filter="sandwiches">ساندوتشات</button>
+    <button class="filter-btn" data-filter="addons">إضافات</button>
+    <button class="filter-btn" data-filter="plates">أطباق</button>
+    <button class="filter-btn" data-filter="pasta">باستا</button>
+    <button class="filter-btn" data-filter="pasta-addons">إضافات الباستا</button>
+    <button class="filter-btn" data-filter="breakfast-boxes">بوكسات فطور</button>
+    <button class="filter-btn" data-filter="bakery">معجنات</button>
+    <button class="filter-btn" data-filter="falafel">فلافل</button>
+    <button class="filter-btn" data-filter="drinks">مشروبات</button>
+
+  </div>
+
+  <button class="filters-menu-btn">☰</button>
+</div>
+
+<!-- FULLSCREEN FILTER MENU -->
+<div class="filters-fullscreen" id="filtersFull">
+  <div class="filters-fullscreen-content">
+    <h3>كل الفئات</h3>
+
+    <button class="filter-full-btn" data-filter="all">الكل</button>
+    <button class="filter-full-btn" data-filter="offers">عروض</button>
+    <button class="filter-full-btn" data-filter="meals">وجبات</button>
+    <button class="filter-full-btn" data-filter="sandwiches">ساندوتشات</button>
+    <button class="filter-full-btn" data-filter="addons">إضافات</button>
+    <button class="filter-full-btn" data-filter="plates">أطباق</button>
+    <button class="filter-full-btn" data-filter="pasta">باستا</button>
+    <button class="filter-full-btn" data-filter="pasta-addons">إضافات الباستا</button>
+    <button class="filter-full-btn" data-filter="breakfast-boxes">بوكسات فطور</button>
+    <button class="filter-full-btn" data-filter="bakery">معجنات</button>
+    <button class="filter-full-btn" data-filter="falafel">فلافل</button>
+    <button class="filter-full-btn" data-filter="drinks">مشروبات</button>
+
+    <button class="close-full">إغلاق</button>
+  </div>
+</div>
+
+<!-- MENU CONTENT -->
+<div class="menu-content">
+
+  <h2 class="category-title">ساندوتشات</h2>
+  <div class="items-grid">
+    <div class="item-card" data-category="sandwiches">
+      <div class="item-header">
+        <div class="item-name">دجاج كرسبي</div>
+        <div class="item-price">26 ر.س</div>
+      </div>
+      <div class="item-desc">دجاج مقرمش وصوص خاص.</div>
+    </div>
+
+    <div class="item-card" data-category="sandwiches">
+      <div class="item-header">
+        <div class="item-name">حلومي مشوي</div>
+        <div class="item-price">24 ر.س</div>
+      </div>
+      <div class="item-desc">جبن حلومي وصوص بستو.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+const fullMenu = document.getElementById("filtersFull");
+const openBtn = document.querySelector(".filters-menu-btn");
+const closeBtn = document.querySelector(".close-full");
+
+openBtn.onclick = () => fullMenu.style.display = "flex";
+closeBtn.onclick = () => fullMenu.style.display = "none";
+
+const filterButtons = document.querySelectorAll(".filter-btn, .filter-full-btn");
+const itemCards = document.querySelectorAll(".item-card");
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const filter = btn.dataset.filter;
+
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector(`.filter-btn[data-filter="${filter}"]`)?.classList.add("active");
+
+    itemCards.forEach(card => {
+      card.style.display = (filter === "all" || card.dataset.category === filter) ? "block" : "none";
+    });
+
+    fullMenu.style.display = "none";
+  });
+});
+</script>
+
+</body>
+</html>
