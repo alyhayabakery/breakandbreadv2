@@ -1,59 +1,105 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
 <title>Break & Bread - Menu</title>
 
+<!-- خط Tajawal -->
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 <style>
+:root {
+  --primary: #f27e3e;
+  --bg: #fff7f2;
+  --card-bg: #ffffff;
+  --text-main: #2b241a;
+  --text-muted: #7a6a55;
+}
+
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f1ea;
-  color: #2b241a;
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
 }
 
-/* HEADER */
-header {
-  background: #1f1b16;
-  color: #fff;
+/* ===========================
+   HERO HEADER
+=========================== */
+.hero-header {
+  width: 100%;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.hero-header img.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* الصورة تظهر ممتدة بالكامل */
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.15));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.hero-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
 }
 
-.brand-logo {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 20%, #fbe3b0, #c7923e);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 800;
-  color: #1f1b16;
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.branch-info {
-  font-size: 12px;
-  text-align: left;
+.hero-text h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
 }
 
-/* FILTER BAR */
+.hero-text small {
+  color: #fff;
+  opacity: 0.9;
+}
+
+/* ===========================
+   FILTER BAR (STICKY)
+=========================== */
 .filters-bar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #fff;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f7f3ec;
-  padding: 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .filters-scroll {
@@ -72,34 +118,35 @@ header {
   padding: 6px 14px;
   border-radius: 999px;
   border: 1px solid transparent;
-  background: #fff;
+  background: #fff3ec;
   cursor: pointer;
   font-size: 13px;
+  transition: 0.25s ease;
 }
 
 .filter-btn.active {
-  background: #c7923e;
+  background: var(--primary);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(199,146,62,0.4);
+  box-shadow: 0 4px 10px rgba(242,126,62,0.4);
 }
 
+/* زر القائمة */
 .filters-menu-btn {
-  background: #1f1b16;
+  background: var(--primary);
   color: #fff;
   border: none;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
 }
 
-/* FULLSCREEN FILTER MENU */
+/* ===========================
+   FULLSCREEN FILTER MENU
+=========================== */
 .filters-fullscreen {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.55);
   display: none;
   justify-content: center;
@@ -117,15 +164,13 @@ header {
   border-radius: 16px;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .close-full {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #c7923e;
+  background: var(--primary);
   color: #fff;
   border: none;
   font-size: 20px;
@@ -133,25 +178,12 @@ header {
   height: 34px;
   border-radius: 50%;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .filters-full-list {
   margin-top: 50px;
   overflow-y: auto;
-  padding-right: 5px;
   max-height: calc(85vh - 80px);
-}
-
-.filters-full-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.filters-full-list::-webkit-scrollbar-thumb {
-  background: #c7923e;
-  border-radius: 10px;
 }
 
 .filter-full-btn {
@@ -161,34 +193,39 @@ header {
   margin: 6px 0;
   border-radius: 10px;
   border: 1px solid #ddd;
-  background: #f7f3ec;
+  background: #fff3ec;
   font-size: 16px;
   cursor: pointer;
-  text-align: center;
 }
 
-/* MENU ITEMS */
+/* ===========================
+   MENU CONTENT
+=========================== */
 .menu-content {
-  padding: 20px;
+  padding: 16px;
 }
 
 .category-title {
-  font-size: 18px;
+  font-size: 20px;
   margin: 20px 0 10px;
 }
 
-.items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 12px;
+/* ===========================
+   FULL WIDTH ITEM CARD
+=========================== */
+.item-card {
+  background: var(--card-bg);
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.05);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.04);
 }
 
-.item-card {
-  background: #fff;
-  padding: 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+.item-card:hover {
+  transform: translateY(-2px);
 }
 
 .item-header {
@@ -197,40 +234,86 @@ header {
 }
 
 .item-name {
+  font-size: 16px;
   font-weight: 600;
 }
 
-.item-price {
-  color: #c7923e;
-  font-weight: 700;
+.item-desc {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
-.item-desc {
-  font-size: 12px;
-  color: #7a6a55;
-  margin-top: 4px;
+.item-price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.item-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.sar-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+
+/* ===========================
+   COLLAPSE
+=========================== */
+.item-collapse {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .35s ease, opacity .35s ease;
+}
+
+.item-card.open .item-collapse {
+  max-height: 260px;
+  opacity: 1;
+}
+
+.item-collapse-inner img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/* ===========================
+   HIDE TITLES WHEN FILTERED
+=========================== */
+.hidden {
+  display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="brand">
-    <div class="brand-logo">B&B</div>
-    <div>
-      <h2 style="margin:0;">Break & Bread</h2>
+<!-- ===========================
+     HERO HEADER
+=========================== -->
+<div class="hero-header">
+  <img src="header-bg.jpg" class="hero-bg" alt="">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-logo">
+      <img src="logo.png" alt="">
+    </div>
+    <div class="hero-text">
+      <h1>Break & Bread</h1>
       <small>قائمة الطعام</small>
     </div>
   </div>
+</div>
 
-  <div class="branch-info">
-    فرع الدمام<br>شارع المثال – ٧ صباحًا حتى ١٢ ليلًا
-  </div>
-</header>
-
-<!-- FILTER BAR -->
+<!-- ===========================
+     FILTER BAR
+=========================== -->
 <div class="filters-bar">
   <div class="filters-scroll">
     <button class="filter-btn active" data-filter="all">الكل</button>
@@ -246,14 +329,19 @@ header {
     <button class="filter-btn" data-filter="falafel">فلافل</button>
     <button class="filter-btn" data-filter="drinks">مشروبات</button>
   </div>
+
   <button class="filters-menu-btn">☰</button>
 </div>
 
-<!-- FULLSCREEN FILTER MENU -->
+<!-- ===========================
+     FULLSCREEN FILTER MENU
+=========================== -->
 <div class="filters-fullscreen" id="filtersFull">
   <div class="filters-fullscreen-content">
     <button class="close-full">✕</button>
+
     <h3>كل الفئات</h3>
+
     <div class="filters-full-list">
       <button class="filter-full-btn" data-filter="all">الكل</button>
       <button class="filter-full-btn" data-filter="offers">عروض</button>
@@ -271,312 +359,89 @@ header {
   </div>
 </div>
 
-<!-- MENU CONTENT -->
+<!-- ===========================
+     MENU CONTENT
+=========================== -->
 <div class="menu-content">
 
-  <!-- عروض -->
-  <h2 class="category-title">عروض</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="offers">
-      <div class="item-header"><div class="item-name">عرض فطور لشخصين</div><div class="item-price">39 ر.س</div></div>
-      <div class="item-desc">بيض، جبن، خبز طازج، مشروبان ساخنان.</div>
-    </div>
-    <div class="item-card" data-category="offers">
-      <div class="item-header"><div class="item-name">عرض قهوة + كرواسون</div><div class="item-price">18 ر.س</div></div>
-      <div class="item-desc">قهوة مختصة مع كرواسون زبدة.</div>
-    </div>
-    <div class="item-card" data-category="offers">
-      <div class="item-header"><div class="item-name">بوكس مشاركة صغير</div><div class="item-price">49 ر.س</div></div>
-      <div class="item-desc">تشكيلة معجنات صغيرة مع صوصات.</div>
-    </div>
-    <div class="item-card" data-category="offers">
-      <div class="item-header"><div class="item-name">عرض ساندوتش + مشروب</div><div class="item-price">25 ر.س</div></div>
-      <div class="item-desc">أي ساندوتش + مشروب غازي.</div>
-    </div>
-    <div class="item-card" data-category="offers">
-      <div class="item-header"><div class="item-name">عرض قهوة اليوم</div><div class="item-price">10 ر.س</div></div>
-      <div class="item-desc">قهوة اليوم بحجم متوسط.</div>
-    </div>
-  </div>
+  <!-- مثال قسم واحد — كرر نفس النمط لباقي الأقسام -->
+  <h2 class="category-title" data-section="offers">عروض</h2>
 
-  <!-- وجبات -->
-  <h2 class="category-title">وجبات</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="meals">
-      <div class="item-header"><div class="item-name">وجبة دجاج مشوي</div><div class="item-price">32 ر.س</div></div>
-      <div class="item-desc">دجاج مشوي مع أرز وسلطة.</div>
+  <div class="item-card" data-category="offers">
+    <div class="item-header">
+      <div>
+        <div class="item-name">عرض فطور لشخصين</div>
+        <div class="item-desc">بيض، جبن، خبز طازج، مشروبان ساخنان.</div>
+      </div>
+      <div class="item-price-wrap">
+        <div class="item-price">39</div>
+        <img src="sar.png" class="sar-icon">
+      </div>
     </div>
-    <div class="item-card" data-category="meals">
-      <div class="item-header"><div class="item-name">وجبة برجر كلاسيك</div><div class="item-price">29 ر.س</div></div>
-      <div class="item-desc">برجر لحم مع بطاطس ومشروب.</div>
-    </div>
-    <div class="item-card" data-category="meals">
-      <div class="item-header"><div class="item-name">وجبة فطور بريك</div><div class="item-price">35 ر.س</div></div>
-      <div class="item-desc">بيض، جبن، مربى، خبز، مشروب ساخن.</div>
-    </div>
-    <div class="item-card" data-category="meals">
-      <div class="item-header"><div class="item-name">وجبة تندوري</div><div class="item-price">34 ر.س</div></div>
-      <div class="item-desc">قطع دجاج متبلة مع خبز وصوص.</div>
-    </div>
-    <div class="item-card" data-category="meals">
-      <div class="item-header"><div class="item-name">وجبة فلافل كاملة</div><div class="item-price">22 ر.س</div></div>
-      <div class="item-desc">فلافل، حمص، سلطة، خبز.</div>
-    </div>
-  </div>
 
-  <!-- ساندوتشات -->
-  <h2 class="category-title">ساندوتشات</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="sandwiches">
-      <div class="item-header"><div class="item-name">ساندوتش دجاج كرسبي</div><div class="item-price">18 ر.س</div></div>
-      <div class="item-desc">دجاج مقرمش وصوص خاص.</div>
-    </div>
-    <div class="item-card" data-category="sandwiches">
-      <div class="item-header"><div class="item-name">ساندوتش حلومي مشوي</div><div class="item-price">17 ر.س</div></div>
-      <div class="item-desc">جبن حلومي وخضار طازجة.</div>
-    </div>
-    <div class="item-card" data-category="sandwiches">
-      <div class="item-header"><div class="item-name">ساندوتش فلافل</div><div class="item-price">10 ر.س</div></div>
-      <div class="item-desc">فلافل، طحينة، مخلل.</div>
-    </div>
-    <div class="item-card" data-category="sandwiches">
-      <div class="item-header"><div class="item-name">ساندوتش تركي</div><div class="item-price">19 ر.س</div></div>
-      <div class="item-desc">لحم مدخن وجبن.</div>
-    </div>
-    <div class="item-card" data-category="sandwiches">
-      <div class="item-header"><div class="item-name">ساندوتش جبن مشكل</div><div class="item-price">15 ر.س</div></div>
-      <div class="item-desc">تشكيلة أجبان مع خبز خاص.</div>
-    </div>
-  </div>
-
-  <!-- إضافات -->
-  <h2 class="category-title">إضافات</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="addons">
-      <div class="item-header"><div class="item-name">جبن إضافي</div><div class="item-price">3 ر.س</div></div>
-      <div class="item-desc">شريحة جبن إضافية.</div>
-    </div>
-    <div class="item-card" data-category="addons">
-      <div class="item-header"><div class="item-name">صوص خاص</div><div class="item-price">2 ر.س</div></div>
-      <div class="item-desc">صوص بريك آند بريد.</div>
-    </div>
-    <div class="item-card" data-category="addons">
-      <div class="item-header"><div class="item-name">بطاطس صغيرة</div><div class="item-price">6 ر.س</div></div>
-      <div class="item-desc">بطاطس مقلية.</div>
-    </div>
-    <div class="item-card" data-category="addons">
-      <div class="item-header"><div class="item-name">خبز إضافي</div><div class="item-price">3 ر.س</div></div>
-      <div class="item-desc">خبز طازج من الفرن.</div>
-    </div>
-    <div class="item-card" data-category="addons">
-      <div class="item-header"><div class="item-name">خضار إضافية</div><div class="item-price">2 ر.س</div></div>
-      <div class="item-desc">خس، طماطم، خيار.</div>
-    </div>
-  </div>
-
-  <!-- أطباق -->
-  <h2 class="category-title">أطباق</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="plates">
-      <div class="item-header"><div class="item-name">طبق شكشوكة</div><div class="item-price">21 ر.س</div></div>
-      <div class="item-desc">بيض مع صلصة طماطم وخبز.</div>
-    </div>
-    <div class="item-card" data-category="plates">
-      <div class="item-header"><div class="item-name">طبق بيض عيون</div><div class="item-price">19 ر.س</div></div>
-      <div class="item-desc">بيض عيون مع خبز.</div>
-    </div>
-    <div class="item-card" data-category="plates">
-      <div class="item-header"><div class="item-name">طبق فلافل</div><div class="item-price">18 ر.س</div></div>
-      <div class="item-desc">فلافل، حمص، سلطة.</div>
-    </div>
-    <div class="item-card" data-category="plates">
-      <div class="item-header"><div class="item-name">طبق جبن مشكل</div><div class="item-price">23 ر.س</div></div>
-      <div class="item-desc">تشكيلة أجبان مع خبز.</div>
-    </div>
-    <div class="item-card" data-category="plates">
-      <div class="item-header"><div class="item-name">طبق حمص</div><div class="item-price">15 ر.س</div></div>
-      <div class="item-desc">حمص بالطحينة وزيت زيتون.</div>
-    </div>
-  </div>
-
-  <!-- باستا -->
-  <h2 class="category-title">باستا</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="pasta">
-      <div class="item-header"><div class="item-name">باستا ألفريدو</div><div class="item-price">28 ر.س</div></div>
-      <div class="item-desc">باستا بصوص كريمي ودجاج.</div>
-    </div>
-    <div class="item-card" data-category="pasta">
-      <div class="item-header"><div class="item-name">باستا بولونيز</div><div class="item-price">27 ر.س</div></div>
-      <div class="item-desc">باستا بلحم مفروم وصلصة طماطم.</div>
-    </div>
-    <div class="item-card" data-category="pasta">
-      <div class="item-header"><div class="item-name">باستا بيستو</div><div class="item-price">26 ر.س</div></div>
-      <div class="item-desc">باستا بصوص البيستو والريحان.</div>
-    </div>
-    <div class="item-card" data-category="pasta">
-      <div class="item-header"><div class="item-name">باستا خضار</div><div class="item-price">24 ر.س</div></div>
-      <div class="item-desc">باستا مع خضار مشوية.</div>
-    </div>
-    <div class="item-card" data-category="pasta">
-      <div class="item-header"><div class="item-name">باستا أربعة أجبان</div><div class="item-price">29 ر.س</div></div>
-      <div class="item-desc">باستا بصوص أربعة أجبان.</div>
-    </div>
-  </div>
-
-  <!-- إضافات الباستا -->
-  <h2 class="category-title">إضافات الباستا</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="pasta-addons">
-      <div class="item-header"><div class="item-name">دجاج إضافي</div><div class="item-price">6 ر.س</div></div>
-      <div class="item-desc">قطع دجاج مشوي.</div>
-    </div>
-    <div class="item-card" data-category="pasta-addons">
-      <div class="item-header"><div class="item-name">جبن بارميزان</div><div class="item-price">4 ر.س</div></div>
-      <div class="item-desc">رشة جبن بارميزان.</div>
-    </div>
-    <div class="item-card" data-category="pasta-addons">
-      <div class="item-header"><div class="item-name">مشروم إضافي</div><div class="item-price">3 ر.س</div></div>
-      <div class="item-desc">مشروم طازج.</div>
-    </div>
-    <div class="item-card" data-category="pasta-addons">
-      <div class="item-header"><div class="item-name">صوص إضافي</div><div class="item-price">3 ر.س</div></div>
-      <div class="item-desc">صوص باستا إضافي.</div>
-    </div>
-    <div class="item-card" data-category="pasta-addons">
-      <div class="item-header"><div class="item-name">خضار إضافية</div><div class="item-price">3 ر.س</div></div>
-      <div class="item-desc">خضار مشوية إضافية.</div>
-    </div>
-  </div>
-
-  <!-- بوكسات فطور -->
-  <h2 class="category-title">بوكسات فطور</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="breakfast-boxes">
-      <div class="item-header"><div class="item-name">بوكس فطور صغير</div><div class="item-price">49 ر.س</div></div>
-      <div class="item-desc">مناسب لشخصين.</div>
-    </div>
-    <div class="item-card" data-category="breakfast-boxes">
-      <div class="item-header"><div class="item-name">بوكس فطور عائلي</div><div class="item-price">89 ر.س</div></div>
-      <div class="item-desc">يكفي 4–5 أشخاص.</div>
-    </div>
-    <div class="item-card" data-category="breakfast-boxes">
-      <div class="item-header"><div class="item-name">بوكس فطور شرقي</div><div class="item-price">59 ر.س</div></div>
-      <div class="item-desc">فلافل، حمص، جبن، خبز.</div>
-    </div>
-    <div class="item-card" data-category="breakfast-boxes">
-      <div class="item-header"><div class="item-name">بوكس فطور غربي</div><div class="item-price">65 ر.س</div></div>
-      <div class="item-desc">كرواسون، بيض، جبن، قهوة.</div>
-    </div>
-    <div class="item-card" data-category="breakfast-boxes">
-      <div class="item-header"><div class="item-name">بوكس فطور ميني</div><div class="item-price">39 ر.س</div></div>
-      <div class="item-desc">ميني ساندوتشات متنوعة.</div>
-    </div>
-  </div>
-
-  <!-- معجنات -->
-  <h2 class="category-title">معجنات</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="bakery">
-      <div class="item-header"><div class="item-name">مناقيش زعتر</div><div class="item-price">8 ر.س</div></div>
-      <div class="item-desc">مناقيش زعتر بزيت الزيتون.</div>
-    </div>
-    <div class="item-card" data-category="bakery">
-      <div class="item-header"><div class="item-name">مناقيش جبن</div><div class="item-price">10 ر.س</div></div>
-      <div class="item-desc">جبن مشكل.</div>
-    </div>
-    <div class="item-card" data-category="bakery">
-      <div class="item-header"><div class="item-name">كرواسون زبدة</div><div class="item-price">9 ر.س</div></div>
-      <div class="item-desc">كرواسون فرنسي طازج.</div>
-    </div>
-    <div class="item-card" data-category="bakery">
-      <div class="item-header"><div class="item-name">كرواسون شوكولاتة</div><div class="item-price">11 ر.س</div></div>
-      <div class="item-desc">محشو شوكولاتة.</div>
-    </div>
-    <div class="item-card" data-category="bakery">
-      <div class="item-header"><div class="item-name">فطيرة سبانخ</div><div class="item-price">9 ر.س</div></div>
-      <div class="item-desc">سبانخ متبلة وخبز طازج.</div>
-    </div>
-  </div>
-
-  <!-- فلافل -->
-  <h2 class="category-title">فلافل</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="falafel">
-      <div class="item-header"><div class="item-name">فلافل حبة</div><div class="item-price">1 ر.س</div></div>
-      <div class="item-desc">حبة فلافل طازجة.</div>
-    </div>
-    <div class="item-card" data-category="falafel">
-      <div class="item-header"><div class="item-name">صحن فلافل</div><div class="item-price">12 ر.س</div></div>
-      <div class="item-desc">10 حبات مع صوص.</div>
-    </div>
-    <div class="item-card" data-category="falafel">
-      <div class="item-header"><div class="item-name">فلافل محشية جبن</div><div class="item-price">2 ر.س</div></div>
-      <div class="item-desc">فلافل بحشوة جبن.</div>
-    </div>
-    <div class="item-card" data-category="falafel">
-      <div class="item-header"><div class="item-name">فلافل حار</div><div class="item-price">1 ر.س</div></div>
-      <div class="item-desc">فلافل مع شطة.</div>
-    </div>
-    <div class="item-card" data-category="falafel">
-      <div class="item-header"><div class="item-name">فلافل مشكل</div><div class="item-price">14 ر.س</div></div>
-      <div class="item-desc">تشكيلة فلافل متنوعة.</div>
-    </div>
-  </div>
-
-  <!-- مشروبات -->
-  <h2 class="category-title">مشروبات</h2>
-  <div class="items-grid">
-    <div class="item-card" data-category="drinks">
-      <div class="item-header"><div class="item-name">قهوة أمريكانو</div><div class="item-price">12 ر.س</div></div>
-      <div class="item-desc">قهوة سوداء ساخنة.</div>
-    </div>
-    <div class="item-card" data-category="drinks">
-      <div class="item-header"><div class="item-name">لاتيه</div><div class="item-price">15 ر.س</div></div>
-      <div class="item-desc">إسبريسو مع حليب.</div>
-    </div>
-    <div class="item-card" data-category="drinks">
-      <div class="item-header"><div class="item-name">كابتشينو</div><div class="item-price">14 ر.س</div></div>
-      <div class="item-desc">قهوة بالحليب ورغوة.</div>
-    </div>
-    <div class="item-card" data-category="drinks">
-      <div class="item-header"><div class="item-name">شاي نعناع</div><div class="item-price">8 ر.س</div></div>
-      <div class="item-desc">شاي أخضر مع نعناع.</div>
-    </div>
-    <div class="item-card" data-category="drinks">
-      <div class="item-header"><div class="item-name">ماء</div><div class="item-price">2 ر.س</div></div>
-      <div class="item-desc">مياه معدنية.</div>
+    <div class="item-collapse">
+      <div class="item-collapse-inner">
+        <img src="product-offer1.jpg">
+      </div>
     </div>
   </div>
 
 </div>
 
-<!-- JAVASCRIPT -->
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
 <script>
+const filterBtns = document.querySelectorAll(".filter-btn");
+const filterFullBtns = document.querySelectorAll(".filter-full-btn");
+const cards = document.querySelectorAll(".item-card");
+const titles = document.querySelectorAll(".category-title");
 const fullMenu = document.getElementById("filtersFull");
-const openBtn = document.querySelector(".filters-menu-btn");
-const closeBtn = document.querySelector(".close-full");
+const openMenuBtn = document.querySelector(".filters-menu-btn");
+const closeMenuBtn = document.querySelector(".close-full");
 
-openBtn.onclick = () => fullMenu.style.display = "flex";
-closeBtn.onclick = () => fullMenu.style.display = "none";
+/* فتح القائمة */
+openMenuBtn.onclick = () => {
+  fullMenu.style.display = "flex";
+};
 
-const filterButtons = document.querySelectorAll(".filter-btn, .filter-full-btn");
-const itemCards = document.querySelectorAll(".item-card");
+/* إغلاق القائمة */
+closeMenuBtn.onclick = () => {
+  fullMenu.style.display = "none";
+};
 
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const filter = btn.dataset.filter;
+/* تطبيق الفلتر */
+function applyFilter(filter) {
+  filterBtns.forEach(b => b.classList.remove("active"));
+  const topBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+  if (topBtn) topBtn.classList.add("active");
 
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    const topBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
-    if (topBtn) topBtn.classList.add("active");
+  cards.forEach(card => {
+    card.style.display = (filter === "all" || card.dataset.category === filter) ? "block" : "none";
+    card.classList.remove("open");
+  });
 
-    itemCards.forEach(card => {
-      const cat = card.dataset.category;
-      card.style.display = (filter === "all" || cat === filter) ? "block" : "none";
-    });
+  if (filter === "all") {
+    titles.forEach(t => t.classList.remove("hidden"));
+  } else {
+    titles.forEach(t => t.classList.add("hidden"));
+  }
 
-    fullMenu.style.display = "none";
+  fullMenu.style.display = "none";
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+});
+
+filterFullBtns.forEach(btn => {
+  btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+});
+
+/* Collapse */
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("open");
   });
 });
 </script>
