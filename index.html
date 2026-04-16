@@ -10,51 +10,72 @@
 
 <style>
 :root {
-  --primary: #f27e3e;
-  --bg: #fff7f2;
-  --text-main: #ffffff;
+  --primary-dark: #f27e3e;   /* خلفية الموقع */
+  --card-light: #f58f55;     /* لون الكروت C1 */
+  --text-white: #ffffff;
   --text-muted: #ffe7d8;
 }
 
-body {
+/* ===========================
+   RESET + BODY
+=========================== */
+* {
   margin: 0;
-  font-family: 'Tajawal', sans-serif;
-  background: var(--bg);
-  color: var(--text-main);
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* HERO */
-.hero-wrapper {
-  width: 100%;
-  padding-inline: 5px;
-  background: var(--bg);
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--primary-dark);
+  color: var(--text-white);
+  overflow-x: hidden;
 }
+
+/* ===========================
+   GLOBAL WRAPPER
+=========================== */
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding-inline: 5px; /* ضبط الجوانب */
+}
+
+/* ===========================
+   HERO HEADER
+=========================== */
 .hero-header {
   width: 100%;
-  height: auto;
   position: relative;
-  overflow: visible;
+  padding-inline: 5px;
 }
+
 .hero-header img.hero-bg {
   width: 100%;
   height: auto;
   object-fit: contain;
   display: block;
+  border-radius: 12px;
 }
+
 .hero-overlay {
   position: absolute;
-  inset: 0;
+  inset: 5px;
+  border-radius: 12px;
   background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.1));
 }
+
 .hero-content {
   position: absolute;
-  bottom: 10px;
-  left: 15px;
+  bottom: 15px;
+  right: 20px; /* على اليمين */
   display: flex;
   align-items: center;
   gap: 12px;
   z-index: 2;
 }
+
 .hero-logo {
   width: 70px;
   height: 70px;
@@ -62,33 +83,38 @@ body {
   overflow: hidden;
   background: #fff;
 }
+
 .hero-logo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .hero-text h1 {
   margin: 0;
   color: #fff;
   font-size: 22px;
 }
+
 .hero-text small {
   color: #fff;
   opacity: 0.9;
 }
 
-/* FILTER BAR */
+/* ===========================
+   FILTER BAR
+=========================== */
 .filters-bar {
   position: sticky;
   top: 0;
   z-index: 999;
-  background: #fff;
-  padding: 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: var(--primary-dark);
+  padding: 10px 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .filters-scroll {
   display: flex;
   gap: 8px;
@@ -96,33 +122,42 @@ body {
   white-space: nowrap;
   scrollbar-width: none;
 }
+
 .filters-scroll::-webkit-scrollbar {
   display: none;
 }
+
 .filter-btn {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
-  background: #fff3ec;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
   cursor: pointer;
   font-size: 13px;
+  color: #fff;
   transition: 0.25s ease;
 }
+
 .filter-btn.active {
-  background: var(--primary);
-  color: #fff;
+  background: #fff;
+  color: var(--primary-dark);
+  font-weight: 700;
 }
+
 .filters-menu-btn {
-  background: var(--primary);
-  color: #fff;
+  background: #fff;
+  color: var(--primary-dark);
   border: none;
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 20px;
+  font-weight: bold;
 }
 
-/* FULLSCREEN FILTER MENU */
+/* ===========================
+   FULLSCREEN FILTER MENU
+=========================== */
 .filters-fullscreen {
   position: fixed;
   inset: 0;
@@ -133,6 +168,7 @@ body {
   padding-top: 40px;
   z-index: 9999;
 }
+
 .filters-fullscreen-content {
   background: #fff;
   width: 92%;
@@ -143,11 +179,12 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .close-full {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: var(--primary);
+  background: var(--primary-dark);
   color: #fff;
   border: none;
   font-size: 20px;
@@ -156,11 +193,13 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
 .filters-full-list {
   margin-top: 50px;
   overflow-y: auto;
   max-height: calc(85vh - 80px);
 }
+
 .filter-full-btn {
   display: block;
   width: 100%;
@@ -171,73 +210,90 @@ body {
   background: #fff3ec;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 
-/* MENU CONTENT */
+/* ===========================
+   MENU CONTENT
+=========================== */
 .menu-content {
-  padding: 16px;
+  padding: 16px 5px;
 }
+
 .category-title {
   font-size: 20px;
   margin: 20px 0 10px;
-  color: #000;
+  color: #fff;
 }
 
-/* ITEM CARD */
+/* ===========================
+   ITEM CARD
+=========================== */
 .item-card {
-  background: var(--primary);
+  background: var(--card-light);
   padding: 14px;
   border-radius: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   cursor: pointer;
   transition: 0.2s ease;
   color: #fff;
-  will-change: transform;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18); /* D3 */
 }
+
 .item-card:hover {
   transform: translateY(-2px);
 }
+
 .item-header {
   display: flex;
   justify-content: space-between;
 }
+
 .item-name {
   font-size: 16px;
   font-weight: 700;
 }
+
 .item-desc {
   font-size: 13px;
-  color: #ffe7d8;
+  color: #fff;
+  opacity: 0.85;
 }
+
 .item-price-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
+
 .item-price {
   font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
+
 .sar-icon {
   width: 20px;
   height: 20px;
   margin-top: 2px;
 }
 
-/* COLLAPSE */
+/* ===========================
+   COLLAPSE
+=========================== */
 .item-collapse {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height .35s ease, opacity .35s ease;
   margin-bottom: 20px;
-  will-change: max-height;
 }
+
 .item-card.open .item-collapse {
   max-height: 260px;
   opacity: 1;
 }
+
 .item-collapse-inner img {
   width: 100%;
   border-radius: 12px;
@@ -258,8 +314,11 @@ body {
 
 <body>
 
-<!-- HERO -->
-<div class="hero-wrapper">
+<div class="wrapper">
+
+  <!-- ===========================
+       HERO HEADER
+  =========================== -->
   <div class="hero-header">
     <img src="header-bg.png" class="hero-bg" alt="">
     <div class="hero-overlay"></div>
@@ -274,974 +333,484 @@ body {
       </div>
     </div>
   </div>
+
+  <!-- ===========================
+       FILTER BAR
+  =========================== -->
+  <div class="filters-bar">
+    <div class="filters-scroll">
+      <button class="filter-btn active" data-filter="all">الكل</button>
+      <button class="filter-btn" data-filter="offers">عروض</button>
+      <button class="filter-btn" data-filter="meals">وجبات</button>
+      <button class="filter-btn" data-filter="sandwiches">ساندوتشات</button>
+      <button class="filter-btn" data-filter="addons">إضافات</button>
+      <button class="filter-btn" data-filter="plates">أطباق</button>
+      <button class="filter-btn" data-filter="pasta">باستا</button>
+      <button class="filter-btn" data-filter="pasta-addons">إضافات الباستا</button>
+      <button class="filter-btn" data-filter="breakfast">بوكسات فطور</button>
+      <button class="filter-btn" data-filter="bakery">معجنات</button>
+      <button class="filter-btn" data-filter="falafel">فلافل</button>
+      <button class="filter-btn" data-filter="drinks">مشروبات</button>
+    </div>
+
+    <button class="filters-menu-btn">☰</button>
+  </div>
+
+  <!-- ===========================
+       FULLSCREEN FILTER MENU
+  =========================== -->
+  <div class="filters-fullscreen" id="filtersFull">
+    <div class="filters-fullscreen-content">
+      <button class="close-full">✕</button>
+
+      <h3>كل الفئات</h3>
+
+      <div class="filters-full-list">
+        <button class="filter-full-btn" data-filter="all">الكل</button>
+        <button class="filter-full-btn" data-filter="offers">عروض</button>
+        <button class="filter-full-btn" data-filter="meals">وجبات</button>
+        <button class="filter-full-btn" data-filter="sandwiches">ساندوتشات</button>
+        <button class="filter-full-btn" data-filter="addons">إضافات</button>
+        <button class="filter-full-btn" data-filter="plates">أطباق</button>
+        <button class="filter-full-btn" data-filter="pasta">باستا</button>
+        <button class="filter-full-btn" data-filter="pasta-addons">إضافات الباستا</button>
+        <button class="filter-full-btn" data-filter="breakfast">بوكسات فطور</button>
+        <button class="filter-full-btn" data-filter="bakery">معجنات</button>
+        <button class="filter-full-btn" data-filter="falafel">فلافل</button>
+        <button class="filter-full-btn" data-filter="drinks">مشروبات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       MENU CONTENT (سيتم إضافة الأقسام في الجزء 2)
+       <h2 class="category-title" data-section="offers">عروض</h2>
+
+<!-- 1 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض فطور لشخصين</div>
+      <div class="item-desc">بيض + جبن + خبز + مشروبان</div>
+    </div>
+    <div class="item-price-wrap">
+      <div class="item-price">39</div>
+      <img src="sar.png" class="sar-icon">
+    </div>
+  </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer1.jpg"></div></div>
 </div>
 
-<!-- FILTER BAR -->
-<div class="filters-bar">
-  <div class="filters-scroll">
-    <button class="filter-btn active" data-filter="all">الكل</button>
-    <button class="filter-btn" data-filter="offers">عروض</button>
-    <button class="filter-btn" data-filter="meals">وجبات</button>
-    <button class="filter-btn" data-filter="sandwiches">ساندوتشات</button>
-    <button class="filter-btn" data-filter="addons">إضافات</button>
-    <button class="filter-btn" data-filter="plates">أطباق</button>
-    <button class="filter-btn" data-filter="drinks">مشروبات</button>
+<!-- 2 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض قهوة + كرواسون</div>
+      <div class="item-desc">قهوة مختصة + كرواسون زبدة</div>
+    </div>
+    <div class="item-price-wrap">
+      <div class="item-price">18</div>
+      <img src="sar.png" class="sar-icon">
+    </div>
   </div>
-  <button class="filters-menu-btn">☰</button>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer2.jpg"></div></div>
 </div>
 
-<!-- FULLSCREEN FILTER MENU -->
-<div class="filters-fullscreen" id="filtersFull">
-  <div class="filters-fullscreen-content">
-    <button class="close-full">✕</button>
-    <h3>كل الفئات</h3>
-    <div class="filters-full-list">
-      <button class="filter-full-btn" data-filter="all">الكل</button>
-      <button class="filter-full-btn" data-filter="offers">عروض</button>
-      <button class="filter-full-btn" data-filter="meals">وجبات</button>
-      <button class="filter-full-btn" data-filter="sandwiches">ساندوتشات</button>
-      <button class="filter-full-btn" data-filter="addons">إضافات</button>
-      <button class="filter-full-btn" data-filter="plates">أطباق</button>
-      <button class="filter-full-btn" data-filter="drinks">مشروبات</button>
+<!-- 3 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">بوكس مشاركة صغير</div>
+      <div class="item-desc">تشكيلة معجنات + صوصات</div>
+    </div>
+    <div class="item-price-wrap">
+      <div class="item-price">49</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer3.jpg"></div></div>
 </div>
 
-<!-- MENU CONTENT -->
-<div class="menu-content">
-
-  <!-- عروض -->
-  <h2 class="category-title" data-section="offers">عروض</h2>
-
-  <!-- 8 أصناف عروض -->
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض فطور لشخصين</div>
-        <div class="item-desc">بيض، جبن، خبز طازج، مشروبان ساخنان.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">39</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
+<!-- 4 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض ساندوتش + مشروب</div>
+      <div class="item-desc">أي ساندوتش + مشروب غازي</div>
     </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer1.jpg">
-      </div>
+    <div class="item-price-wrap">
+      <div class="item-price">25</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer4.jpg"></div></div>
+</div>
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض قهوة + كرواسون</div>
-        <div class="item-desc">قهوة مختصة مع كرواسون زبدة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">18</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
+<!-- 5 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض قهوة اليوم</div>
+      <div class="item-desc">قهوة اليوم حجم متوسط</div>
     </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer2.jpg">
-      </div>
+    <div class="item-price-wrap">
+      <div class="item-price">10</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer5.jpg"></div></div>
+</div>
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">بوكس مشاركة صغير</div>
-        <div class="item-desc">تشكيلة معجنات صغيرة مع صوصات.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">49</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
+<!-- 6 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض فطور عائلي</div>
+      <div class="item-desc">بوكس فطور يكفي 4 أشخاص</div>
     </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer3.jpg">
-      </div>
+    <div class="item-price-wrap">
+      <div class="item-price">89</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer6.jpg"></div></div>
+</div>
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض ساندوتش + مشروب</div>
-        <div class="item-desc">أي ساندوتش + مشروب غازي.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">25</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
+<!-- 7 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض قهوة + كيك</div>
+      <div class="item-desc">قهوة ساخنة + كيك</div>
     </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer4.jpg">
-      </div>
+    <div class="item-price-wrap">
+      <div class="item-price">22</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer7.jpg"></div></div>
+</div>
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض قهوة اليوم</div>
-        <div class="item-desc">قهوة اليوم بحجم متوسط.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">10</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
+<!-- 8 -->
+<div class="item-card" data-category="offers">
+  <div class="item-header">
+    <div>
+      <div class="item-name">عرض ميني ساندوتشات</div>
+      <div class="item-desc">ميني ساندوتشات متنوعة</div>
     </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer5.jpg">
-      </div>
+    <div class="item-price-wrap">
+      <div class="item-price">45</div>
+      <img src="sar.png" class="sar-icon">
     </div>
   </div>
+  <div class="item-collapse"><div class="item-collapse-inner"><img src="offer8.jpg"></div></div>
+</div>
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض فطور عائلي</div>
-        <div class="item-desc">بوكس فطور يكفي 4 أشخاص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">89</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer6.jpg">
-      </div>
-    </div>
-  </div>
+       
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض قهوة + كيك</div>
-        <div class="item-desc">قهوة ساخنة مع قطعة كيك.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">22</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer7.jpg">
-      </div>
-    </div>
-  </div>
+  <div class="menu-content" id="menuContent">
 
-  <div class="item-card" data-category="offers">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عرض ميني ساندوتشات</div>
-        <div class="item-desc">ميني ساندوتشات متنوعة مع صوص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">45</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="offer8.jpg">
-      </div>
-    </div>
-  </div>
+    <!-- سيتم إضافة 12 قسم × 8 أصناف هنا في الجزء الثاني -->
+     <h2 class="category-title" data-section="meals">وجبات</h2>
 
-  <!-- وجبات -->
-  <h2 class="category-title" data-section="meals">وجبات</h2>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة دجاج مشوي</div><div class="item-desc">دجاج + أرز + سلطة</div></div><div class="item-price-wrap"><div class="item-price">32</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal1.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة دجاج مشوي</div>
-        <div class="item-desc">دجاج مشوي مع أرز وسلطة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">32</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal1.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة برجر كلاسيك</div><div class="item-desc">برجر + بطاطس + مشروب</div></div><div class="item-price-wrap"><div class="item-price">29</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal2.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة برجر كلاسيك</div>
-        <div class="item-desc">برجر لحم مع بطاطس ومشروب.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">29</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal2.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة فطور بريك</div><div class="item-desc">بيض + جبن + مربى</div></div><div class="item-price-wrap"><div class="item-price">35</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal3.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة فطور بريك</div>
-        <div class="item-desc">بيض، جبن، مربى، خبز، مشروب ساخن.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">35</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal3.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة تندوري</div><div class="item-desc">دجاج متبل + خبز</div></div><div class="item-price-wrap"><div class="item-price">34</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal4.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة تندوري</div>
-        <div class="item-desc">قطع دجاج متبلة مع خبز وصوص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">34</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal4.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة فلافل كاملة</div><div class="item-desc">فلافل + حمص + سلطة</div></div><div class="item-price-wrap"><div class="item-price">22</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal5.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة فلافل كاملة</div>
-        <div class="item-desc">فلافل، حمص، سلطة، خبز.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">22</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal5.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة سمك مقلي</div><div class="item-desc">سمك + بطاطس + صوص</div></div><div class="item-price-wrap"><div class="item-price">38</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal6.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة سمك مقلي</div>
-        <div class="item-desc">سمك مقلي مع بطاطس وصوص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">38</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal6.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة مشاوي مشكلة</div><div class="item-desc">تشكيلة مشاوي + أرز</div></div><div class="item-price-wrap"><div class="item-price">45</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal7.jpg"></div></div></div>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة مشاوي مشكلة</div>
-        <div class="item-desc">تشكيلة مشاوي مع أرز.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">45</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal7.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="meals"><div class="item-header"><div><div class="item-name">وجبة برجر دجاج</div><div class="item-desc">برجر دجاج + بطاطس</div></div><div class="item-price-wrap"><div class="item-price">27</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="meal8.jpg"></div></div></div>
+<h2 class="category-title" data-section="sandwiches">ساندوتشات</h2>
 
-  <div class="item-card" data-category="meals">
-    <div class="item-header">
-      <div>
-        <div class="item-name">وجبة برجر دجاج</div>
-        <div class="item-desc">برجر دجاج مع بطاطس.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">27</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="meal8.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">دجاج كرسبي</div><div class="item-desc">دجاج مقرمش + صوص</div></div><div class="item-price-wrap"><div class="item-price">18</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand1.jpg"></div></div></div>
 
-  <!-- ساندوتشات -->
-  <h2 class="category-title" data-section="sandwiches">ساندوتشات</h2>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">حلومي مشوي</div><div class="item-desc">حلومي + خضار</div></div><div class="item-price-wrap"><div class="item-price">17</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand2.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش دجاج كرسبي</div>
-        <div class="item-desc">دجاج مقرمش وصوص خاص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">18</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand1.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">ساندوتش فلافل</div><div class="item-desc">فلافل + طحينة</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand3.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش حلومي مشوي</div>
-        <div class="item-desc">جبن حلومي وخضار طازجة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">17</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand2.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">ساندوتش تركي</div><div class="item-desc">لحم مدخن + جبن</div></div><div class="item-price-wrap"><div class="item-price">19</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand4.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش فلافل</div>
-        <div class="item-desc">فلافل، طحينة، مخلل.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">10</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand3.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">جبن مشكل</div><div class="item-desc">تشكيلة أجبان</div></div><div class="item-price-wrap"><div class="item-price">15</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand5.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش تركي</div>
-        <div class="item-desc">لحم مدخن وجبن.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">19</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand4.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">تونة</div><div class="item-desc">تونة + خس</div></div><div class="item-price-wrap"><div class="item-price">16</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand6.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش جبن مشكل</div>
-        <div class="item-desc">تشكيلة أجبان مع خبز خاص.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">15</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand5.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">بيض</div><div class="item-desc">بيض + جبن</div></div><div class="item-price-wrap"><div class="item-price">12</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand7.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش تونة</div>
-        <div class="item-desc">تونة، خس، صوص خفيف.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">16</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand6.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="sandwiches"><div class="item-header"><div><div class="item-name">جبن كريمي</div><div class="item-desc">جبن كريمي + خيار</div></div><div class="item-price-wrap"><div class="item-price">11</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="sand8.jpg"></div></div></div>
+<h2 class="category-title" data-section="addons">إضافات</h2>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش بيض</div>
-        <div class="item-desc">بيض، جبن، خبز طازج.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">12</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand7.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">جبن إضافي</div><div class="item-desc">شريحة جبن</div></div><div class="item-price-wrap"><div class="item-price">3</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon1.jpg"></div></div></div>
 
-  <div class="item-card" data-category="sandwiches">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ساندوتش جبن كريمي</div>
-        <div class="item-desc">جبن كريمي وخيار.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">11</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="sand8.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">صوص خاص</div><div class="item-desc">صوص بريك آند بريد</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon2.jpg"></div></div></div>
 
-  <!-- إضافات -->
-  <h2 class="category-title" data-section="addons">إضافات</h2>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">بطاطس صغيرة</div><div class="item-desc">بطاطس مقلية</div></div><div class="item-price-wrap"><div class="item-price">6</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon3.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">جبن إضافي</div>
-        <div class="item-desc">شريحة جبن إضافية.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">3</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon1.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">خبز إضافي</div><div class="item-desc">خبز طازج</div></div><div class="item-price-wrap"><div class="item-price">3</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon4.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">صوص خاص</div>
-        <div class="item-desc">صوص بريك آند بريد.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon2.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">خضار إضافية</div><div class="item-desc">خس + خيار + طماطم</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon5.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">بطاطس صغيرة</div>
-        <div class="item-desc">بطاطس مقلية.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">6</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon3.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">زيتون</div><div class="item-desc">أسود أو أخضر</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon6.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">خبز إضافي</div>
-        <div class="item-desc">خبز طازج من الفرن.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">3</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon4.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">مخلل</div><div class="item-desc">مخلل خيار</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon7.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">خضار إضافية</div>
-        <div class="item-desc">خس، طماطم، خيار.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon5.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="addons"><div class="item-header"><div><div class="item-name">طحينة</div><div class="item-desc">صوص طحينة</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="addon8.jpg"></div></div></div>
+<h2 class="category-title" data-section="plates">أطباق</h2>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">زيتون</div>
-        <div class="item-desc">زيتون أسود أو أخضر.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon6.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق شكشوكة</div><div class="item-desc">بيض مع صلصة طماطم</div></div><div class="item-price-wrap"><div class="item-price">21</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate1.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">مخلل</div>
-        <div class="item-desc">مخلل خيار.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon7.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق بيض عيون</div><div class="item-desc">بيض عيون + خبز</div></div><div class="item-price-wrap"><div class="item-price">19</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate2.jpg"></div></div></div>
 
-  <div class="item-card" data-category="addons">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طحينة</div>
-        <div class="item-desc">صوص طحينة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="addon8.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق فلافل</div><div class="item-desc">فلافل + حمص + سلطة</div></div><div class="item-price-wrap"><div class="item-price">18</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate3.jpg"></div></div></div>
 
-  <!-- أطباق -->
-  <h2 class="category-title" data-section="plates">أطباق</h2>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق جبن مشكل</div><div class="item-desc">تشكيلة أجبان</div></div><div class="item-price-wrap"><div class="item-price">23</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate4.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق شكشوكة</div>
-        <div class="item-desc">بيض مع صلصة طماطم وخبز.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">21</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate1.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق حمص</div><div class="item-desc">حمص بالطحينة</div></div><div class="item-price-wrap"><div class="item-price">15</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate5.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق بيض عيون</div>
-        <div class="item-desc">بيض عيون مع خبز.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">19</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate2.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق فول</div><div class="item-desc">فول بزيت الزيتون</div></div><div class="item-price-wrap"><div class="item-price">14</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate6.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق فلافل</div>
-        <div class="item-desc">فلافل، حمص، سلطة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">18</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate3.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق لبنة</div><div class="item-desc">لبنة + زيت زيتون</div></div><div class="item-price-wrap"><div class="item-price">13</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate7.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق جبن مشكل</div>
-        <div class="item-desc">تشكيلة أجبان مع خبز.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">23</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate4.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="plates"><div class="item-header"><div><div class="item-name">طبق فطور شرقي</div><div class="item-desc">تشكيلة فطور</div></div><div class="item-price-wrap"><div class="item-price">39</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="plate8.jpg"></div></div></div>
+<h2 class="category-title" data-section="pasta">باستا</h2>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق حمص</div>
-        <div class="item-desc">حمص بالطحينة وزيت زيتون.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">15</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate5.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا ألفريدو</div><div class="item-desc">دجاج + صوص كريمي</div></div><div class="item-price-wrap"><div class="item-price">28</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta1.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق فول</div>
-        <div class="item-desc">فول بزيت الزيتون.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">14</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate6.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا بولونيز</div><div class="item-desc">لحم مفروم + طماطم</div></div><div class="item-price-wrap"><div class="item-price">27</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta2.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق لبنة</div>
-        <div class="item-desc">لبنة مع زيت زيتون وزعتر.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">13</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate7.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا بيستو</div><div class="item-desc">ريحان + صوص بيستو</div></div><div class="item-price-wrap"><div class="item-price">26</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta3.jpg"></div></div></div>
 
-  <div class="item-card" data-category="plates">
-    <div class="item-header">
-      <div>
-        <div class="item-name">طبق مشكل فطور</div>
-        <div class="item-desc">تشكيلة فطور شرقي.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">39</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="plate8.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا خضار</div><div class="item-desc">خضار مشوية</div></div><div class="item-price-wrap"><div class="item-price">24</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta4.jpg"></div></div></div>
 
-  <!-- مشروبات -->
-  <h2 class="category-title" data-section="drinks">مشروبات</h2>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا أربعة أجبان</div><div class="item-desc">صوص 4 أجبان</div></div><div class="item-price-wrap"><div class="item-price">29</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta5.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">قهوة أمريكانو</div>
-        <div class="item-desc">قهوة سوداء ساخنة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">12</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink1.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا مشروم</div><div class="item-desc">مشروم + كريمة</div></div><div class="item-price-wrap"><div class="item-price">26</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta6.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">لاتيه</div>
-        <div class="item-desc">إسبريسو مع حليب.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">15</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink2.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا سبايسي</div><div class="item-desc">صوص حار</div></div><div class="item-price-wrap"><div class="item-price">25</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta7.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">كابتشينو</div>
-        <div class="item-desc">قهوة بالحليب ورغوة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">14</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink3.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta"><div class="item-header"><div><div class="item-name">باستا دجاج مشوي</div><div class="item-desc">دجاج + صوص أبيض</div></div><div class="item-price-wrap"><div class="item-price">30</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="pasta8.jpg"></div></div></div>
+<h2 class="category-title" data-section="pasta-addons">إضافات الباستا</h2>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">شاي نعناع</div>
-        <div class="item-desc">شاي أخضر مع نعناع.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">8</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink4.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">دجاج إضافي</div><div class="item-desc">قطع دجاج</div></div><div class="item-price-wrap"><div class="item-price">6</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon1.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">ماء</div>
-        <div class="item-desc">مياه معدنية.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">2</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink5.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">جبن بارميزان</div><div class="item-desc">رشة بارميزان</div></div><div class="item-price-wrap"><div class="item-price">4</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon2.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عصير برتقال</div>
-        <div class="item-desc">عصير برتقال طازج.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">10</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink6.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">مشروم إضافي</div><div class="item-desc">مشروم طازج</div></div><div class="item-price-wrap"><div class="item-price">3</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon3.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">عصير تفاح</div>
-        <div class="item-desc">عصير تفاح مبرد.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">10</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink7.jpg">
-      </div>
-    </div>
-  </div>
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">صوص إضافي</div><div class="item-desc">صوص باستا</div></div><div class="item-price-wrap"><div class="item-price">3</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon4.jpg"></div></div></div>
 
-  <div class="item-card" data-category="drinks">
-    <div class="item-header">
-      <div>
-        <div class="item-name">مشروب غازي</div>
-        <div class="item-desc">مشروبات غازية متنوعة.</div>
-      </div>
-      <div class="item-price-wrap">
-        <div class="item-price">6</div>
-        <img src="sar.png" class="sar-icon">
-      </div>
-    </div>
-    <div class="item-collapse">
-      <div class="item-collapse-inner">
-        <img src="drink8.jpg">
-      </div>
-    </div>
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">خضار إضافية</div><div class="item-desc">خضار مشوية</div></div><div class="item-price-wrap"><div class="item-price">3</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon5.jpg"></div></div></div>
+
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">زيت زيتون</div><div class="item-desc">رشة زيت زيتون</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon6.jpg"></div></div></div>
+
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">شطة</div><div class="item-desc">شطة حارة</div></div><div class="item-price-wrap"><div class="item-price">1</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon7.jpg"></div></div></div>
+
+<div class="item-card" data-category="pasta-addons"><div class="item-header"><div><div class="item-name">ريحان</div><div class="item-desc">أوراق ريحان</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="paddon8.jpg"></div></div></div>
+<h2 class="category-title" data-section="breakfast">بوكسات فطور</h2>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس فطور صغير</div><div class="item-desc">يكفي شخصين</div></div><div class="item-price-wrap"><div class="item-price">49</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break1.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس فطور عائلي</div><div class="item-desc">يكفي 4–5 أشخاص</div></div><div class="item-price-wrap"><div class="item-price">89</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break2.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس شرقي</div><div class="item-desc">فلافل + حمص + جبن</div></div><div class="item-price-wrap"><div class="item-price">59</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break3.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس غربي</div><div class="item-desc">كرواسون + بيض + قهوة</div></div><div class="item-price-wrap"><div class="item-price">65</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break4.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس ميني</div><div class="item-desc">ميني ساندوتشات</div></div><div class="item-price-wrap"><div class="item-price">39</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break5.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس جبن</div><div class="item-desc">تشكيلة أجبان</div></div><div class="item-price-wrap"><div class="item-price">55</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break6.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس عربي</div><div class="item-desc">لبنة + زيتون + خبز</div></div><div class="item-price-wrap"><div class="item-price">52</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break7.jpg"></div></div></div>
+
+<div class="item-card" data-category="breakfast"><div class="item-header"><div><div class="item-name">بوكس فطور فاخر</div><div class="item-desc">تشكيلة فاخرة</div></div><div class="item-price-wrap"><div class="item-price">99</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="break8.jpg"></div></div></div>
+<h2 class="category-title" data-section="bakery">معجنات</h2>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">مناقيش زعتر</div><div class="item-desc">زعتر + زيت زيتون</div></div><div class="item-price-wrap"><div class="item-price">8</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery1.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">مناقيش جبن</div><div class="item-desc">جبن مشكل</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery2.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">مناقيش لحم</div><div class="item-desc">لحم مفروم + بصل</div></div><div class="item-price-wrap"><div class="item-price">12</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery3.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">مناقيش سبانخ</div><div class="item-desc">سبانخ + ليمون</div></div><div class="item-price-wrap"><div class="item-price">9</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery4.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">كرواسون زبدة</div><div class="item-desc">كرواسون طازج</div></div><div class="item-price-wrap"><div class="item-price">7</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery5.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">كرواسون جبن</div><div class="item-desc">جبن كريمي</div></div><div class="item-price-wrap"><div class="item-price">9</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery6.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">كرواسون شوكولاتة</div><div class="item-desc">محشو شوكولاتة</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery7.jpg"></div></div></div>
+
+<div class="item-card" data-category="bakery"><div class="item-header"><div><div class="item-name">فطيرة لبنة</div><div class="item-desc">لبنة + زيت زيتون</div></div><div class="item-price-wrap"><div class="item-price">11</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="bakery8.jpg"></div></div></div>
+<h2 class="category-title" data-section="falafel">فلافل</h2>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل سادة</div><div class="item-desc">6 قطع فلافل</div></div><div class="item-price-wrap"><div class="item-price">6</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel1.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل محشي</div><div class="item-desc">محشي بصلصة خاصة</div></div><div class="item-price-wrap"><div class="item-price">8</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel2.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">ساندوتش فلافل</div><div class="item-desc">فلافل + طحينة</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel3.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">طبق فلافل</div><div class="item-desc">فلافل + حمص + سلطة</div></div><div class="item-price-wrap"><div class="item-price">18</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel4.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل سبايسي</div><div class="item-desc">فلافل حار</div></div><div class="item-price-wrap"><div class="item-price">7</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel5.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل محمص</div><div class="item-desc">مقرمش أكثر</div></div><div class="item-price-wrap"><div class="item-price">7</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel6.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل بالجبن</div><div class="item-desc">محشي جبن</div></div><div class="item-price-wrap"><div class="item-price">9</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel7.jpg"></div></div></div>
+
+<div class="item-card" data-category="falafel"><div class="item-header"><div><div class="item-name">فلافل مشكل</div><div class="item-desc">تشكيلة فلافل</div></div><div class="item-price-wrap"><div class="item-price">12</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="falafel8.jpg"></div></div></div>
+<h2 class="category-title" data-section="drinks">مشروبات</h2>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">قهوة أمريكانو</div><div class="item-desc">قهوة سوداء</div></div><div class="item-price-wrap"><div class="item-price">12</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink1.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">لاتيه</div><div class="item-desc">إسبريسو + حليب</div></div><div class="item-price-wrap"><div class="item-price">15</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink2.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">كابتشينو</div><div class="item-desc">قهوة بالحليب</div></div><div class="item-price-wrap"><div class="item-price">14</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink3.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">شاي نعناع</div><div class="item-desc">شاي + نعناع</div></div><div class="item-price-wrap"><div class="item-price">8</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink4.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">ماء</div><div class="item-desc">مياه معدنية</div></div><div class="item-price-wrap"><div class="item-price">2</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink5.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">عصير برتقال</div><div class="item-desc">طازج</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink6.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">عصير تفاح</div><div class="item-desc">مبرد</div></div><div class="item-price-wrap"><div class="item-price">10</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink7.jpg"></div></div></div>
+
+<div class="item-card" data-category="drinks"><div class="item-header"><div><div class="item-name">مشروب غازي</div><div class="item-desc">بيبسي / سفن</div></div><div class="item-price-wrap"><div class="item-price">6</div><img src="sar.png" class="sar-icon"></div></div><div class="item-collapse"><div class="item-collapse-inner"><img src="drink8.jpg"></div></div></div>
+
+
   </div>
 
 </div>
-
 <script>
-const filterBtns = document.querySelectorAll(".filter-btn");
-const filterFullBtns = document.querySelectorAll(".filter-full-btn");
-const cards = document.querySelectorAll(".item-card");
-const titles = document.querySelectorAll(".category-title");
-const fullMenu = document.getElementById("filtersFull");
-const openMenuBtn = document.querySelector(".filters-menu-btn");
-const closeMenuBtn = document.querySelector(".close-full");
+// =============== HELPERS ===============
+const qs  = (s, p=document) => p.querySelector(s);
+const qsa = (s, p=document) => [...p.querySelectorAll(s)];
 
-openMenuBtn.onclick = () => {
-  fullMenu.style.display = "flex";
-};
-closeMenuBtn.onclick = () => {
-  fullMenu.style.display = "none";
-};
+const filterButtons      = qsa('.filter-btn');
+const filterFullButtons  = qsa('.filter-full-btn');
+const filtersMenuBtn     = qs('.filters-menu-btn');
+const filtersFull        = qs('#filtersFull');
+const filtersFullClose   = qs('.close-full');
+const categoryTitles     = qsa('.category-title');
+const itemCards          = qsa('.item-card');
 
+// =============== COLLAPSE ITEMS ===============
+itemCards.forEach(card => {
+  card.addEventListener('click', e => {
+    // منع التفاعل لو الضغط على السعر أو الأيقونة
+    if (e.target.closest('.item-price-wrap')) return;
+
+    const isOpen = card.classList.contains('open');
+    // اغلاق الباقي
+    itemCards.forEach(c => c.classList.remove('open'));
+    if (!isOpen) {
+      card.classList.add('open');
+      // scroll بسيط للكارت المفتوح
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+});
+
+// =============== FILTER CORE ===============
 function applyFilter(filter) {
-  filterBtns.forEach(b => b.classList.remove("active"));
-  const topBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
-  if (topBtn) topBtn.classList.add("active");
-
-  cards.forEach(card => {
-    card.style.display = (filter === "all" || card.dataset.category === filter) ? "block" : "none";
-    card.classList.remove("open");
+  // تفعيل الزر في الشريط العلوي
+  filterButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter || (filter === 'all' && btn.dataset.filter === 'all'));
   });
 
-  if (filter === "all") {
-    titles.forEach(t => t.classList.remove("hidden"));
-  } else {
-    titles.forEach(t => t.classList.add("hidden"));
-  }
+  // إظهار/إخفاء الكروت
+  itemCards.forEach(card => {
+    const cat = card.dataset.category;
+    if (filter === 'all' || cat === filter) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 
-  fullMenu.style.display = "none";
+  // إظهار/إخفاء عناوين الأقسام
+  categoryTitles.forEach(title => {
+    const sec = title.dataset.section;
+    if (filter === 'all') {
+      title.classList.remove('hidden');
+    } else {
+      // لو يوجد كروت ظاهرة من نفس القسم
+      const hasVisible = itemCards.some(card =>
+        card.dataset.category === sec &&
+        card.style.display !== 'none'
+      );
+      if (sec === filter && hasVisible) {
+        title.classList.remove('hidden');
+      } else if (filter !== 'all' && sec !== filter) {
+        title.classList.add('hidden');
+      } else {
+        title.classList.add('hidden');
+      }
+    }
+  });
+
+  // scroll للقسم المطلوب
+  if (filter !== 'all') {
+    const targetTitle = categoryTitles.find(t => t.dataset.section === filter);
+    if (targetTitle) {
+      setTimeout(() => {
+        targetTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
 }
 
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
-});
-filterFullBtns.forEach(btn => {
-  btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
-});
-
-cards.forEach(card => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("open");
+// =============== TOP FILTER BUTTONS ===============
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    applyFilter(filter);
   });
 });
+
+// =============== FULLSCREEN FILTER MENU ===============
+filtersMenuBtn.addEventListener('click', () => {
+  filtersFull.style.display = 'flex';
+});
+
+filtersFullClose.addEventListener('click', () => {
+  filtersFull.style.display = 'none';
+});
+
+// عند اختيار قسم من القائمة الكاملة
+filterFullButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+
+    // تفعيل hover/active في القائمة الكاملة
+    filterFullButtons.forEach(b => b.style.background = '#fff3ec');
+    btn.style.background = '#ffe0cf';
+
+    // تطبيق الفلتر
+    applyFilter(filter);
+
+    // إغلاق القائمة بعد الاختيار
+    setTimeout(() => {
+      filtersFull.style.display = 'none';
+    }, 150);
+  });
+});
+
+// =============== SMOOTH SCROLL FIX (منع التهنيج) ===============
+let isScrolling = false;
+window.addEventListener('scroll', () => {
+  if (!isScrolling) {
+    isScrolling = true;
+    window.requestAnimationFrame(() => {
+      isScrolling = false;
+    });
+  }
+}, { passive: true });
 </script>
 
 </body>
